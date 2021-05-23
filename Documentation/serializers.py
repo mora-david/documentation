@@ -3,6 +3,10 @@ from rest_framework import serializers
 from django.db.models import Avg
 
 class RatingSerializer(serializers.ModelSerializer):
+    """
+    Serializador para mostrar la valoración del 1 al 5 y los comentarios asociados a la documentación, se utiliza
+    para el CRUD del modelo Rating
+    """
 
     class Meta:
         model = Rating
@@ -10,6 +14,10 @@ class RatingSerializer(serializers.ModelSerializer):
         read_only_fields = ['created']
 
 class DocsSerializer(serializers.ModelSerializer):
+    """
+    Serializador utilizado para la documentación, se utiliza para el crud, cuando se usa para el get, devuelve además
+    los rating y comentarios asociados a dicha documentación
+    """
     review = serializers.SerializerMethodField()
     calificacion_promedio = serializers.SerializerMethodField()
     # review = RatingSerializer
